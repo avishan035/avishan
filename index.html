@@ -1,66 +1,327 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avishan Ketheswaran</title>
-  <meta name="description" content="Avishan Ketheswaran, mechatronics engineering student. Projects, GitHub, LinkedIn and resume.">
-  <meta name="theme-color" content="#0f1716">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Avishan Ketheswaran | Engineering Portfolio</title>
+
+    <meta name="description" content="Avishan Ketheswaran's engineering portfolio, projects and experience.">
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="top">
-    <h1>Avishan Ketheswaran</h1>
 
-    <!-- Smaller button: repos -->
-    <div class="small-links">
-      <a class="btn small" href="https://github.com/avishan035?tab=repositories" target="_blank" rel="noopener">GitHub Repos</a>
-    </div>
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#about" class="logo">AK.</a>
 
-    <!-- Bigger buttons: LinkedIn + Resume -->
-    <div class="big-links">
-      <a class="btn big" href="https://www.linkedin.com/in/avishan-k/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn big" href="Avishan_Ketheswaran_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-    </div>
-  </header>
+        <nav>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Interests</a>
+        </nav>
 
-  <main>
-    <section class="projects">
-      <h2>Projects</h2>
+        <a class="nav-contact" href="mailto:YOUR_EMAIL">Contact ↗</a>
+    </header>
 
-      <article class="project">
-        <!-- <img src="images/rocket.jpg" alt="Rocket project"> -->
-        <h3>Rocketry — Design & Assembly</h3>
-        <ul>
-          <li>Designed a model rocket from scratch, developing the nose cone, fins, and body tube components using CAD.</li>
-          <li>Used OpenRocket to simulate flight performance and evaluate aerodynamic stability.</li>
-          <li>Prepared component designs for manufacturing and collaborated with a five-person team to assemble the rocket.</li>
-          <li>Achieved an approximate flight altitude of 575 ft (175 m).</li>
-        </ul>
-        <ul class="tags"><li>OpenRocket</li><li>SolidWorks</li><li>Manufacturing</li><li>3D-Printing</li></ul>
-        <!-- <a class="more" href="https://github.com/avishan035/REPO-NAME">View on GitHub →</a> -->
-      </article>
 
-      <article class="project">
-        <!-- <img src="images/arcade.jpg" alt="Arcade machine"> -->
-        <h3>Arcade Machine</h3>
-        <ul>
-    <li>Helped construct a custom arcade cabinet and integrated arcade buttons, joysticks, and control hardware.</li>
+    <main class="container">
 
-    <li>Repurposed and configured an old desktop PC into a dedicated arcade gaming system.</li>
+        <!-- Introduction -->
+        <section class="hero" id="about">
 
-    <li>Developed Ball Pickle, a Java-based game featuring multiple characters, abilities, levels, and boss encounters.</li>
+            <div class="hero-content">
 
-    <li>Integrated and tested the custom game with the arcade setup to create a functional gaming experience.</li>
-</ul>
+                <p class="eyebrow">ENGINEERING PORTFOLIO · TORONTO, CANADA</p>
 
-        <ul class="tags"><li>Java</li><li>GitHub</li><li>JoytoKey</li></ul>
-        <!-- <a class="more" href="https://github.com/avishan035/REPO-NAME">View on GitHub →</a> -->
-      </article>
-    </section>
-  </main>
+                <h1>Avishan<br>Ketheswaran</h1>
 
-  <footer><p>© <span id="year"></span> Avishan Ketheswaran</p></footer>
-  <script src="script.js"></script>
+                <h2>Mechatronics Engineering Student</h2>
+
+                <p class="intro">
+                    Engineering student at Toronto Metropolitan University
+                    interested in robotics, mechanical design, automotive
+                    technology and building things.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="https://www.linkedin.com/in/avishan-k/"
+                       target="_blank" rel="noopener">
+                        LinkedIn ↗
+                    </a>
+
+                    <a href="https://github.com/avishan035"
+                       target="_blank" rel="noopener">
+                        GitHub ↗
+                    </a>
+
+                    <a href="Avishan_Ketheswaran_Resume.pdf"
+                       target="_blank" rel="noopener">
+                        Resume ↗
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Profile Photo -->
+            <div class="hero-image">
+                <img src="images/Avishan.jpg" alt="Avishan Ketheswaran">
+            </div>
+
+        </section>
+
+
+        <!-- Technical Interests -->
+        <section class="skill-strip" id="skills">
+
+            <p>AREAS OF INTEREST</p>
+
+            <div class="skill-list">
+                <span>ROBOTICS</span>
+                <span>MECHANICAL DESIGN</span>
+                <span>CAD</span>
+                <span>3D PRINTING</span>
+                <span>EMBEDDED SYSTEMS</span>
+                <span>AUTOMOTIVE</span>
+            </div>
+
+        </section>
+
+
+        <!-- Projects -->
+        <section class="section" id="projects">
+
+            <div class="section-heading">
+                <span>01 / PROJECTS</span>
+                <h2>Projects</h2>
+            </div>
+
+            <p class="section-description">
+                A collection of engineering, programming and personal projects
+                I've worked on.
+            </p>
+
+
+            <div class="project-grid">
+
+                <!-- Rocket Project -->
+                <article class="project-card">
+
+                    <div class="project-image">
+                        <img src="images/rocket.jpg" alt="MARS student rocket">
+                    </div>
+
+                    <div class="project-info">
+
+                        <p class="project-category">TEAM PROJECT</p>
+
+                        <h3>Rocketry — Design & Assembly</h3>
+
+                        <p>
+                            Designed and assembled a model rocket as part
+                            of a five-person engineering team.
+                        </p>
+
+                        <ul>
+                            <li>Designed the nose cone, fins and body tube components using CAD.</li>
+                            <li>Used OpenRocket to simulate flight performance and evaluate aerodynamic stability.</li>
+                            <li>Prepared components for manufacturing and assembled the completed rocket.</li>
+                            <li>Achieved an approximate flight altitude of 575 ft (175 m).</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>OpenRocket</span>
+                            <span>CAD</span>
+                            <span>Manufacturing</span>
+                            <span>Assembly</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Arcade Machine Project -->
+                <article class="project-card">
+
+                    <div class="project-image">
+                        <img src="images/arcade.jpg" alt="Custom arcade machine">
+                    </div>
+
+                    <div class="project-info">
+
+                        <p class="project-category">PERSONAL PROJECT</p>
+
+                        <h3>Arcade Machine — Hardware & Game Development</h3>
+
+                        <p>
+                            Converted an old desktop PC into a custom arcade
+                            gaming system and developed an original game.
+                        </p>
+
+                        <ul>
+                            <li>Helped construct a custom arcade cabinet and integrated buttons, joysticks and controls.</li>
+                            <li>Repurposed and configured a desktop PC into a dedicated arcade gaming system.</li>
+                            <li>Developed Ball Pickle, a Java game featuring multiple characters, abilities, levels and boss encounters.</li>
+                            <li>Integrated and tested the game with the arcade setup.</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>Java</span>
+                            <span>PC Hardware</span>
+                            <span>Arcade Controls</span>
+                            <span>JoyToKey</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Experience -->
+        <section class="section" id="experience">
+
+            <div class="section-heading">
+                <span>02 / EXPERIENCE</span>
+                <h2>Experience</h2>
+            </div>
+
+
+            <!-- TMU Hyperloop -->
+            <article class="experience-item">
+
+                <div class="experience-top">
+                    <div>
+                        <h3>Structural Team Member</h3>
+                        <p class="organization">TMU Hyperloop</p>
+                    </div>
+
+                    <span class="experience-type">Engineering Team</span>
+                </div>
+
+                <details>
+                    <summary>Show details</summary>
+
+                    <ul>
+                        <li>Contributed to structural engineering work for the Hyperloop pod.</li>
+                        <li>Worked on FEA analysis and technical drawings for an early magnetic braking concept.</li>
+                        <li>Used ANSYS to explore structural design and analysis.</li>
+                    </ul>
+                </details>
+
+            </article>
+
+
+            <!-- Mechatronics Course Union -->
+            <article class="experience-item">
+
+                <div class="experience-top">
+                    <div>
+                        <h3>First-Year Representative</h3>
+                        <p class="organization">Mechatronics Course Union</p>
+                    </div>
+
+                    <span class="experience-type">Leadership</span>
+                </div>
+
+                <details>
+                    <summary>Show details</summary>
+
+                    <ul>
+                        <li>Represented first-year Mechatronics Engineering students.</li>
+                        <li>Helped organize student events and engineering community activities.</li>
+                    </ul>
+                </details>
+
+            </article>
+
+
+            <!-- Geek Squad -->
+            <article class="experience-item">
+
+                <div class="experience-top">
+                    <div>
+                        <h3>Technical Support</h3>
+                        <p class="organization">Geek Squad · Best Buy</p>
+                    </div>
+
+                    <span class="experience-type">Employment</span>
+                </div>
+
+                <details>
+                    <summary>Show details</summary>
+
+                    <ul>
+                        <li>Assisted with computer troubleshooting and technical support.</li>
+                        <li>Worked with computer hardware, diagnostics and repair processes.</li>
+                    </ul>
+                </details>
+
+            </article>
+
+
+            <!-- MicroKool Computers -->
+            <article class="experience-item">
+
+                <div class="experience-top">
+                    <div>
+                        <h3>Computer Technician</h3>
+                        <p class="organization">MicroKool Computers</p>
+                    </div>
+
+                    <span class="experience-type">Co-op</span>
+                </div>
+
+                <details>
+                    <summary>Show details</summary>
+
+                    <ul>
+                        <li>Assisted with laptop repairs, hardware upgrades and PC troubleshooting.</li>
+                        <li>Performed virus removal, system cleaning and computer diagnostics.</li>
+                    </ul>
+                </details>
+
+            </article>
+
+        </section>
+
+
+        <!-- Contact -->
+        <section class="section contact-section" id="contact">
+
+            <div class="section-heading">
+                <span>03 / CONTACT</span>
+                <h2>Get in touch.</h2>
+            </div>
+
+            <p>
+                Interested in engineering, robotics or collaborating
+                on a project? Feel free to reach out.
+            </p>
+
+            <a class="contact-link" href="mailto:YOUR_EMAIL">
+                Send me an email ↗
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Avishan Ketheswaran</p>
+        <a href="#about">Back to top ↑</a>
+    </footer>
+
 </body>
 </html>
