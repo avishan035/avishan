@@ -120,6 +120,27 @@ body.scrolled .nav { background: var(--paper); border-bottom-color: var(--rule);
 .page-title { will-change: transform; }
 /* project window: same sheet, rules and type as the rest of the site */
 body.m-lock { overflow: hidden; }
+/* hidden phosphor terminal */
+.crt { --phos: #39ff6a; position: fixed; inset: 0; z-index: 60; display: none; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) var(--gr) calc(env(safe-area-inset-bottom, 0px) + 16px) var(--gl); background: rgba(0,0,0,.8); }
+.crt.open { display: flex; }
+.crt-win { width: min(980px, 100%); height: min(660px, 100%); display: flex; flex-direction: column; border: 2px solid var(--phos); background: #040604; color: var(--phos); font: 400 15px/1.45 var(--mono); box-shadow: 0 0 44px color-mix(in srgb, var(--phos) 28%, transparent); }
+.crt-bar { display: flex; justify-content: space-between; align-items: center; padding: 0 0 0 14px; border-bottom: 2px solid var(--phos); font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.crt-x { padding: 14px 16px; border: 0; border-left: 2px solid var(--phos); background: none; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+.crt-x:hover { background: var(--phos); color: #040604; }
+.crt-screen { position: relative; flex: 1; min-height: 0; overflow: hidden; text-shadow: 0 0 6px var(--phos); }
+.crt-screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.3) 0 1px, transparent 1px 3px), radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.6) 100%); }
+.crt-term { height: 100%; overflow-y: auto; padding: 18px 20px; }
+.crt-out { margin: 0; white-space: pre-wrap; font: inherit; }
+.crt-line { display: flex; gap: 10px; align-items: center; }
+.crt-in { flex: 1; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; caret-color: var(--phos); text-shadow: inherit; }
+.crt-quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.crt-quick button { padding: 7px 12px; border: 1px solid var(--phos); background: none; color: inherit; font: inherit; font-size: 12px; cursor: pointer; }
+.crt-quick button:hover { background: var(--phos); color: #040604; }
+#crt-game { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+.crt-screen[data-m="game"] .crt-term { visibility: hidden; }
+@keyframes crtf { 0%, 100% { opacity: 1; } 50% { opacity: .965; } }
+@media (prefers-reduced-motion: no-preference) { .crt-screen { animation: crtf .14s steps(1) infinite; } }
+@media (max-width: 600px) { .crt-win { font-size: 13px; } }
 .pop { position: fixed; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 20px) var(--gr) calc(env(safe-area-inset-bottom, 0px) + 20px) var(--gl); }
 .pop.open { display: flex; }
 .pop-back { position: absolute; inset: 0; background: rgba(11,11,15,.55); }
@@ -283,6 +304,20 @@ body.m-lock { overflow: hidden; }
     </div>
   </div>
 </section>
+
+<div class="crt" id="crt" role="dialog" aria-modal="true" aria-label="Hidden terminal">
+  <div class="crt-win">
+    <div class="crt-bar"><span>AK-OS terminal &mdash; esc to exit</span><button class="crt-x" id="crt-x" type="button">Close [x]</button></div>
+    <div class="crt-screen" id="crt-screen" data-m="term">
+      <div class="crt-term" id="crt-term">
+        <pre class="crt-out" id="crt-out"></pre>
+        <label class="crt-line"><span>avishan@ak:~$</span><input class="crt-in" id="crt-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Command"></label>
+        <div class="crt-quick"><button type="button" data-c="play">play</button><button type="button" data-c="help">help</button><button type="button" data-c="colors">colors</button><button type="button" data-c="exit">exit</button></div>
+      </div>
+      <canvas id="crt-game" hidden></canvas>
+    </div>
+  </div>
+</div>
 
 <div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
   <div class="pop-back" data-close></div>
@@ -745,6 +780,115 @@ body.m-lock { overflow: hidden; }
     if (e.key === 'Escape') closeP();
     else if (e.key === 'ArrowRight') step(1);
     else if (e.key === 'ArrowLeft') step(-1);
+  });
+
+  /* ===== hidden terminal + game: Konami code, or click a page-title dot 3 times ===== */
+  var crt = document.getElementById('crt'), cScr = document.getElementById('crt-screen'), cTerm = document.getElementById('crt-term');
+  var cOut = document.getElementById('crt-out'), cIn = document.getElementById('crt-in'), cvs = document.getElementById('crt-game');
+  var COLORS = { green: '#39ff6a', amber: '#ffb000', white: '#e8efe8', cyan: '#3df2ff', violet: '#9b7bff', red: '#ff4d4d', blue: '#4d8dff', pink: '#ff6ad5' };
+  var BOOT = ['AK-OS v1.0  (c) 2026 Avishan Ketheswaran', 'CPU: ESP32 @ 240MHz ........ OK', 'MEM: 520KB ........ OK', 'MOTOR: 28BYJ-48 ........ OK', '', '       ^', '      ( )', '      |A|', '      |K|', '     (|_|)', '      |||', '', 'You found the hidden terminal.', 'Type help for commands, or play to launch ICARUS.', ''];
+  var bootTimer = 0, G = null, graf = 0, crtF = null;
+  function say(t) { cOut.textContent += t + '\n'; cTerm.scrollTop = cTerm.scrollHeight; }
+  function openCrt() {
+    if (crt.classList.contains('open')) return;
+    crtF = document.activeElement; crt.classList.add('open'); document.body.classList.add('m-lock');
+    cOut.textContent = ''; cScr.setAttribute('data-m', 'term'); cvs.hidden = true; cIn.value = ''; cIn.disabled = true;
+    var i = 0; clearInterval(bootTimer);
+    bootTimer = setInterval(function () { if (i < BOOT.length) say(BOOT[i++]); else { clearInterval(bootTimer); cIn.disabled = false; cIn.focus(); } }, reduce ? 0 : 70);
+  }
+  function closeCrt() {
+    clearInterval(bootTimer); endGame(true); crt.classList.remove('open'); document.body.classList.remove('m-lock');
+    if (crtF && crtF.focus) crtF.focus();
+  }
+  function run(raw) {
+    var a = raw.trim().toLowerCase().split(' '), c = a[0];
+    say('avishan@ak:~$ ' + raw);
+    if (!c) return;
+    if (c === 'help') say('commands: help  play  about  projects  color <name>  colors  clear  exit');
+    else if (c === 'play' || c === 'game') startGame();
+    else if (c === 'about') say('Avishan Ketheswaran. Mechatronics engineering, Toronto Metropolitan University. Rockets, robots, the odd arcade machine.');
+    else if (c === 'projects') say('1. Icarus Rocket   2. Arcade Machine   3. Wheeled Robot');
+    else if (c === 'colors') say(Object.keys(COLORS).join('  '));
+    else if (c === 'color') { if (COLORS[a[1]]) { crt.style.setProperty('--phos', COLORS[a[1]]); say('phosphor set to ' + a[1]); } else say('usage: color green|amber|white|cyan|violet|red|blue|pink'); }
+    else if (c === 'clear') cOut.textContent = '';
+    else if (c === 'exit' || c === 'quit') closeCrt();
+    else say('command not found: ' + c + '  (try help)');
+  }
+  function endGame(silent) {
+    cancelAnimationFrame(graf); G = null; cvs.hidden = true; cScr.setAttribute('data-m', 'term');
+    if (!silent) cIn.focus();
+  }
+  function startGame() {
+    var w = cvs.width = cScr.clientWidth, h = cvs.height = cScr.clientHeight, i, hi = 0;
+    try { hi = +localStorage.getItem('ak-hi') || 0; } catch (e) {}
+    G = { w: w, h: h, x: w / 2, tx: w / 2, alt: 0, hi: hi, obs: [], stars: [], sp: 0, dead: false, keys: {}, last: performance.now(), col: getComputedStyle(crt).getPropertyValue('--phos').trim() || '#39ff6a' };
+    for (i = 0; i < 50; i++) G.stars.push({ x: Math.random() * w, y: Math.random() * h, s: .3 + Math.random() });
+    cvs.hidden = false; cScr.setAttribute('data-m', 'game'); cIn.blur();
+    cancelAnimationFrame(graf); graf = requestAnimationFrame(tick2);
+  }
+  function tick2(now) {
+    if (!G) return;
+    var g = G, ctx = cvs.getContext('2d'), dt = Math.min(.05, (now - g.last) / 1000), i, o, v = Math.min(260 + g.alt * .35, 720);
+    g.last = now;
+    if (!g.dead) {
+      g.tx = cl(g.tx + ((g.keys.l ? -1 : 0) + (g.keys.r ? 1 : 0)) * 620 * dt, 20, g.w - 20);
+      g.x += (g.tx - g.x) * Math.min(1, dt * 14);
+      g.alt += v * dt * .1; g.sp -= dt;
+      if (g.sp <= 0) {
+        g.sp = Math.max(.2, .7 - g.alt / 5000);
+        var f = Math.random() < .16;
+        g.obs.push({ x: 20 + Math.random() * (g.w - 40), y: -30, r: f ? 13 : 12 + Math.random() * 16, v: v * (.8 + Math.random() * .5), f: f, c: '@#O%'.charAt(Math.floor(Math.random() * 4)) });
+      }
+      for (i = g.obs.length - 1; i >= 0; i--) {
+        o = g.obs[i]; o.y += o.v * dt;
+        if (Math.hypot(o.x - g.x, o.y - (g.h - 64)) < o.r + 12) {
+          if (o.f) { g.alt += 40; g.obs.splice(i, 1); continue; }
+          g.dead = true; if (g.alt > g.hi) { g.hi = g.alt; try { localStorage.setItem('ak-hi', Math.floor(g.alt)); } catch (e) {} }
+        } else if (o.y > g.h + 40) g.obs.splice(i, 1);
+      }
+      g.stars.forEach(function (s) { s.y += v * dt * s.s * .6; if (s.y > g.h) { s.y = 0; s.x = Math.random() * g.w; } });
+    }
+    ctx.clearRect(0, 0, g.w, g.h);
+    ctx.fillStyle = g.col; ctx.shadowColor = g.col; ctx.shadowBlur = 8; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+    g.stars.forEach(function (s) { ctx.globalAlpha = .25 + s.s * .4; ctx.fillRect(s.x, s.y, 1 + s.s, 1 + s.s * 2); });
+    ctx.globalAlpha = 1;
+    g.obs.forEach(function (ob) { ctx.font = '700 ' + Math.round(ob.r * 2) + 'px "DM Mono", monospace'; ctx.fillText(ob.f ? '+' : ob.c, ob.x, ob.y); });
+    ctx.font = '700 22px "DM Mono", monospace';
+    if (!g.dead) { ctx.fillText('^', g.x, g.h - 86); ctx.fillText('[A]', g.x, g.h - 64); ctx.fillText(Math.random() < .5 ? 'v' : 'V', g.x, g.h - 40); }
+    else { ctx.fillText('* . * . *', g.x, g.h - 64); }
+    ctx.font = '500 14px "DM Mono", monospace'; ctx.textAlign = 'left';
+    ctx.fillText('ALT ' + Math.floor(g.alt) + ' m   BEST ' + Math.floor(Math.max(g.hi, g.alt)) + ' m   (arrows / A D / drag)', 16, 22);
+    if (g.dead) {
+      ctx.textAlign = 'center'; ctx.font = '700 34px "DM Mono", monospace'; ctx.fillText('SIGNAL LOST', g.w / 2, g.h / 2 - 20);
+      ctx.font = '500 14px "DM Mono", monospace'; ctx.fillText('ALT ' + Math.floor(g.alt) + ' m   [ENTER / tap] retry   [ESC] terminal', g.w / 2, g.h / 2 + 22);
+    }
+    graf = requestAnimationFrame(tick2);
+  }
+  function gx(e) { return (e.clientX - cvs.getBoundingClientRect().left) * (G.w / cvs.clientWidth); }
+  cvs.addEventListener('pointermove', function (e) { if (G && !G.dead) G.tx = cl(gx(e), 20, G.w - 20); });
+  cvs.addEventListener('pointerdown', function (e) { if (!G) return; if (G.dead) startGame(); else G.tx = cl(gx(e), 20, G.w - 20); });
+  cIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var t = cIn.value; cIn.value = ''; run(t); } });
+  Array.prototype.forEach.call(crt.querySelectorAll('[data-c]'), function (b) { b.addEventListener('click', function () { run(b.getAttribute('data-c')); }); });
+  document.getElementById('crt-x').addEventListener('click', closeCrt);
+  var KON = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'], ki = 0;
+  document.addEventListener('keydown', function (e) {
+    var k = e.key.toLowerCase();
+    if (!crt.classList.contains('open')) { ki = (k === KON[ki]) ? ki + 1 : (k === KON[0] ? 1 : 0); if (ki === KON.length) { ki = 0; openCrt(); } return; }
+    if (G) {
+      if (k === 'escape') { endGame(); return; }
+      if (k === 'arrowleft' || k === 'a') G.keys.l = true;
+      else if (k === 'arrowright' || k === 'd') G.keys.r = true;
+      else if (k === 'enter' && G.dead) startGame();
+      if (k.indexOf('arrow') === 0 || k === ' ') e.preventDefault();
+    } else if (k === 'escape') closeCrt();
+  });
+  document.addEventListener('keyup', function (e) {
+    if (!G) return; var k = e.key.toLowerCase();
+    if (k === 'arrowleft' || k === 'a') G.keys.l = false; else if (k === 'arrowright' || k === 'd') G.keys.r = false;
+  });
+  var dotN = 0, dotT = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('.page-title .dot'), function (d) {
+    d.addEventListener('click', function () { var n = Date.now(); dotN = (n - dotT < 1200) ? dotN + 1 : 1; dotT = n; if (dotN >= 3) { dotN = 0; openCrt(); } });
   });
 
   onScroll();
