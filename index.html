@@ -157,6 +157,8 @@ body.m-lock { overflow: hidden; }
 .pop-track::-webkit-scrollbar { display: none; }
 .pop-slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 4/3; }
 .pop-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pop-slide.contain { background: #f1f0f4; }
+.pop-slide.contain img { object-fit: contain; }
 .pop-slide.empty { display: grid; place-items: center; background: #f1f0f4; color: var(--mute); font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 .pop-bar { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid var(--ink); font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 .pop-bar button { padding: 18px 20px; border: 0; background: none; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
@@ -203,7 +205,8 @@ body.m-lock { overflow: hidden; }
     <a href="#projects" data-v="projects">Projects</a>
     <a href="#experience" data-v="experience">Experience</a>
     <a href="#skills" data-v="skills">Skills</a>
-    <a class="nav-cta" data-resume href="https://drive.google.com/" target="_blank" rel="noopener">Resume &nearr;</a>
+    <a class="nav-cta" data-resume href="./Avishan_Ketheswaran_Resume.pdf" download="Avishan_Ketheswaran_Resume.pdf" target="_blank" rel="noopener">Resume &nearr;</a>
+  
   </nav>
 </header>
 
@@ -217,7 +220,7 @@ body.m-lock { overflow: hidden; }
   <p class="loc">Mechatronics Engineering<br>Toronto Metropolitan University</p>
   <button class="replay" id="replay" type="button" aria-label="Replay the intro animation">Replay</button>
   <div class="cta">
-    <a class="btn primary" data-resume href="https://drive.google.com/" target="_blank" rel="noopener">View resume <span aria-hidden="true">&nearr;</span></a>
+    <a class="btn primary" data-resume href="./Avishan_Ketheswaran_Resume.pdf" download="Avishan_Ketheswaran_Resume.pdf" target="_blank" rel="noopener">View resume <span aria-hidden="true">&nearr;</span></a>
     <a class="btn" href="https://github.com/avishan035" target="_blank" rel="noopener">GitHub <span aria-hidden="true">&nearr;</span></a>
     <a class="btn" data-li href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&nearr;</span></a>
   </div>
@@ -243,22 +246,24 @@ body.m-lock { overflow: hidden; }
     <article class="row">
       <div><h3><span class="gl" data-t="Arcade Machine">Arcade Machine</span></h3><p class="tag">Independent project / Java</p></div>
       <div>
-        <p class="desc">A custom arcade machine, programmed in Java.</p>
+        <p class="desc">Designed and fabricated a custom arcade machine integrating a purpose-built enclosure, embedded electronics, and a Java-based gaming platform. Developed modular software for game logic and controller inputs, then troubleshot hardware-software integration issues through iterative testing.</p>
         <dl class="spec">
           <div><dt>Language</dt><dd>Java</dd></div>
-          <div><dt>Type</dt><dd>Independent</dd></div>
+          <div><dt>Build</dt><dd>Custom</dd></div>
+          <div><dt>Fcous</dt><dd>Hardware integration</dd></div>
+          <div><dt>Team</dt><dd>London Central SS Collaboration</dd></div>
         </dl>
       </div>
     </article>
     <article class="row">
-      <div><h3><span class="gl" data-t="Wheeled Robot">Wheeled Robot</span></h3><p class="tag">ESP32 / SolidWorks / In progress</p></div>
+      <div><h3><span class="gl" data-t="Autonomous Car">Autonomous Car</span></h3><p class="tag">ESP32 / SolidWorks / In progress</p></div>
       <div>
-        <p class="desc">A two-wheel-drive robot on a 3D-printed chassis modelled in SolidWorks. A bevel gear carries power from the motor to the rear axle, turning the drive through 90&deg;.</p>
+        <p class="desc">Built an Arduino-based autonomous vehicle integrating an ultrasonic distance sensor, an L298N motor driver, and four geared DC motors. Programmed obstacle-detection and motor-control logic in C++ to enable autonomous obstacle avoidance.</p>
         <dl class="spec">
-          <div><dt>Controller</dt><dd>ESP32</dd></div>
-          <div><dt>Motor</dt><dd>28BYJ-48 stepper</dd></div>
-          <div><dt>Drive</dt><dd>2WD, rear</dd></div>
-          <div><dt>Gearing</dt><dd>Bevel</dd></div>
+          <div><dt>Controller</dt><dd>Arduino</dd></div>
+          <div><dt>Language</dt><dd>C++</dd></div>
+          <div><dt>Sensing</dt><dd>Ultrasonic</dd></div>
+          <div><dt>Drive</dt><dd>4 DC motors</dd></div>
         </dl>
       </div>
     </article>
@@ -270,12 +275,10 @@ body.m-lock { overflow: hidden; }
   <div class="wrap">
     <h2 class="page-title"><span class="t" data-t="Experience">Experience</span><span class="dot">.</span></h2>
     <div class="xlist">
-      <article class="xrow"><div class="x-when">Current</div><div><h3 class="x-role"><span class="gl" data-t="Mechatronics Engineering">Mechatronics Engineering</span></h3><p class="x-org">Toronto Metropolitan University</p></div><p class="x-note">First year.</p></article>
-      <article class="xrow"><div class="x-when">Current</div><div><h3 class="x-role"><span class="gl" data-t="Design Team Member">Design Team Member</span></h3><p class="x-org">TMU Hyperloop Design Team</p></div><p class="x-note">Structures and aerodynamics.</p></article>
-      <article class="xrow"><div class="x-when">Current</div><div><h3 class="x-role"><span class="gl" data-t="First-Year Representative">First-Year Representative</span></h3><p class="x-org">Mechatronics Course Union</p></div><p class="x-note">Represents the first-year class. Also Director of Events.</p></article>
-      <article class="xrow"><div class="x-when">Self-employed</div><div><h3 class="x-role"><span class="gl" data-t="Tutor and Technician">Tutor and Technician</span></h3><p class="x-org">Enflair Repairs</p></div><p class="x-note">Computer repair and tutoring, run as small businesses.</p></article>
-      <article class="xrow"><div class="x-when">Summer</div><div><h3 class="x-role"><span class="gl" data-t="Junior Agent">Junior Agent</span></h3><p class="x-org">Geek Squad, Best Buy Canada (Bay and Dundas, Toronto)</p></div><p class="x-note">Repairs, and the service records for each job.</p></article>
-      <article class="xrow"><div class="x-when">Jan &ndash; Jun 2024</div><div><h3 class="x-role"><span class="gl" data-t="Repair Technician Intern">Repair Technician Intern</span></h3><p class="x-org">Micro Kool Computers</p></div><p class="x-note">Computer repair.</p></article>
+        <article class="xrow"><div class="x-when">Sept 2025 - Present</div><div><h3 class="x-role"><span class="gl" data-t="Design Team Member">Design Team Member</span></h3><p class="x-org">TMU Hyperloop Design Team</p></div><p class="x-note">SolidWorks aeroshell design and CFD; ANSYS FEA under hydrostatic pressure loading; Simulink cooling-system modelling; fiberglass composite prototyping.</p></article>
+        <article class="xrow"><div class="x-when">June 2026 - Present</div><div><h3 class="x-role"><span class="gl" data-t="Junior Agent">Junior Agent</span></h3><p class="x-org">Geek Squad, Best Buy Canada</p></div><p class="x-note">Diagnoses and repairs hardware and software faults; prioritizes repair queues, documents diagnostics, and explains technical solutions to customers.</p></article>
+        <article class="xrow"><div class="x-when">Sept 2025 - Present</div><div><h3 class="x-role"><span class="gl" data-t="First-Year Representative">Director of Events</span></h3><p class="x-org">Mechatronics Course Union</p></div><p class="x-note">Co-organized esports and sumo-bot competitions with approximately 45 participants each; delivered SolidWorks and 3D-printing workshops for approximately 20 students.</p></article>
+        <article class="xrow"><div class="x-when">Jan - June 2024</div><div><h3 class="x-role"><span class="gl" data-t="Repair Technician Intern">Computer Repair Technician Intern</span></h3><p class="x-org">Micro Kool Computers</p></div><p class="x-note">Completed 15+ weekly device repairs and helped reduce repair turnaround time by approximately 25%.</p></article>
     </div>
     <div class="foot"><a href="https://github.com/avishan035" target="_blank" rel="noopener">GitHub</a></div>
   </div>
@@ -285,10 +288,10 @@ body.m-lock { overflow: hidden; }
   <div class="wrap">
     <h2 class="page-title"><span class="t" data-t="Skills">Skills</span><span class="dot">.</span></h2>
     <div class="slist">
-      <div class="srow"><div class="s-label">Design and analysis</div><ul class="words"><li>SolidWorks</li><li>ANSYS FEA</li><li>OpenRocket</li></ul></div>
-      <div class="srow"><div class="s-label">Embedded</div><ul class="words"><li>Arduino</li><li>ESP32</li></ul></div>
-      <div class="srow"><div class="s-label">Code</div><ul class="words"><li>C</li><li>Python</li><li>Java</li><li>MATLAB</li></ul></div>
-      <div class="srow"><div class="s-label">Hands-on</div><ul class="words"><li>Computer repair</li><li>Tutoring</li></ul></div>
+        <div class="srow"><div class="s-label">CAD & design</div><ul class="words"><li>SolidWorks</li><li>Surface Modeling</li><li>Assembelies</li><li>Engineering Drawings</li></ul></div>
+        <div class="srow"><div class="s-label">Simulation</div><ul class="words"><li>Ansys FEA</li><li>CFD</li><li>MATLAB</li><li>Simulink</li><li>OpenRocket</li></ul></div>
+        <div class="srow"><div class="s-label">Fabrication</div><ul class="words"><li>3D Printing</li><li>Fiberglass Layup</li><li>Epoxy Composites</li><li>Mould Fabrication</li></ul></div>
+        <div class="srow"><div class="s-label">Code and Electronics</div><ul class="words"><li>Arduino</li><li>ESP32</li><li>Python</li><li>Java</li><li>C</li><li>C++</li></ul></div>
     </div>
     <div class="foot"><a href="https://github.com/avishan035" target="_blank" rel="noopener">GitHub</a></div>
   </div>
@@ -297,7 +300,7 @@ body.m-lock { overflow: hidden; }
 <section id="contact" class="view">
   <div class="wrap">
     <h2 class="page-title"><span class="t" data-t="Contact">Contact</span><span class="dot">.</span></h2>
-    <a class="btn primary xl" data-resume href="https://drive.google.com/" target="_blank" rel="noopener">View / download resume <span aria-hidden="true">&nearr;</span></a>
+    <a class="btn primary xl" data-resume href="./Avishan_Ketheswaran_Resume.pdf" download="Avishan_Ketheswaran_Resume.pdf">View / download resume <span aria-hidden="true">&nearr;</span></a>
     <div class="btns">
       <a class="btn" href="https://github.com/avishan035" target="_blank" rel="noopener">GitHub <span aria-hidden="true">&nearr;</span></a>
       <a class="btn" data-li href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&nearr;</span></a>
@@ -729,15 +732,15 @@ body.m-lock { overflow: hidden; }
   }
 
   /* ===== links + project windows ===== */
-  var RESUME_URL = 'https://drive.google.com/'; /* TODO: paste the link to your resume PDF */
+  var RESUME_URL = './Avishan_Ketheswaran_Resume.pdf'; /* TODO: paste the link to your resume PDF */
   var LINKEDIN_URL = 'https://www.linkedin.com/in/avishan-k/';
   Array.prototype.forEach.call(document.querySelectorAll('[data-resume]'), function (a) { a.href = RESUME_URL; });
   Array.prototype.forEach.call(document.querySelectorAll('[data-li]'), function (a) { a.href = LINKEDIN_URL; });
 
   /* photos: paste image data URIs into each photos array; with none, the window shows a plain "coming soon" panel */
   var PX = [
-    { skills: ['OpenRocket', 'Flight simulation', 'Rocketry', 'Team leadership'], photos: [] },
-    { skills: ['Java', 'Programming', 'Custom build'], photos: [] },
+    { skills: ['OpenRocket', 'Flight simulation', 'Rocketry', 'Team leadership'], fit: 'contain', photos: ['images/rocket.png', 'images/rocket2.jpg'] },
+    { skills: ['Java', 'Programming', 'Custom build'], photos: ['images/arcade.jpg',] },
     { skills: ['ESP32', 'SolidWorks', '3D printing', 'Bevel gearing', 'Stepper motor'], photos: [] }
   ];
   var prow = Array.prototype.slice.call(document.querySelectorAll('.row'));
@@ -746,7 +749,7 @@ body.m-lock { overflow: hidden; }
   function openP(i) {
     var row = prow[i], d = PX[i], title = row.querySelector('h3 .gl').getAttribute('data-t'), n = Math.max(1, d.photos.length), slides = '';
     for (var k = 0; k < n; k++)
-      slides += d.photos[k] ? '<div class="pop-slide"><img src="' + d.photos[k] + '" alt="' + title + ' photo ' + (k + 1) + '"></div>' : '<div class="pop-slide empty">Photos coming soon</div>';
+      slides += d.photos[k] ? '<div class="pop-slide' + (d.fit === 'contain' ? ' contain' : '') + '"><img src="' + d.photos[k] + '" alt="' + title + ' photo ' + (k + 1) + '"></div>' : '<div class="pop-slide empty">Photos coming soon</div>';
     pBody.innerHTML =
       '<div class="pop-head"><p class="tag">' + row.querySelector('.tag').textContent + '</p><h2 id="pop-title" data-t="' + title + '">' + title + '</h2></div>' +
       '<div class="pop-grid"><div class="pop-media"><div class="pop-track" id="pop-track">' + slides + '</div>' +
@@ -807,7 +810,7 @@ body.m-lock { overflow: hidden; }
     if (c === 'help') say('commands: help  play  about  projects  color <name>  colors  clear  exit');
     else if (c === 'play' || c === 'game') startGame();
     else if (c === 'about') say('Avishan Ketheswaran. Mechatronics engineering, Toronto Metropolitan University. Rockets, robots, the odd arcade machine.');
-    else if (c === 'projects') say('1. Icarus Rocket   2. Arcade Machine   3. Wheeled Robot');
+    else if (c === 'projects') say('1. Icarus Rocket   2. Arcade Machine   3. Autonomous Car');
     else if (c === 'colors') say(Object.keys(COLORS).join('  '));
     else if (c === 'color') { if (COLORS[a[1]]) { crt.style.setProperty('--phos', COLORS[a[1]]); say('phosphor set to ' + a[1]); } else say('usage: color green|amber|white|cyan|violet|red|blue|pink'); }
     else if (c === 'clear') cOut.textContent = '';
